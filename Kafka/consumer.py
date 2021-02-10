@@ -18,4 +18,6 @@ for msg in consumer:
     data.append(obj)
 
 InsertIntoDB(topic_name, json.dumps(data))
+Rollback(topic_name)
+
 consumer.close()

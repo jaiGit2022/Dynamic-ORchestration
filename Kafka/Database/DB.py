@@ -51,3 +51,24 @@ def DBConnection():
                                   database="jai")
 
     return connection
+
+def DeleteFromDB(table_name):
+
+    try:
+        connection = DBConnection()  # Get DB Connection
+
+        cursor = connection.cursor()  # Get cursor object
+
+        delete_query = "DROP TABLE " + table_name + ";"
+        cursor.execute(delete_query)  # Execute a command: this delete the table
+        connection.commit()
+
+        print("Table deleted successfully in PostgreSQL")
+
+    except (Exception, Error) as error:
+        print("Error while connecting to PostgreSQL", error)
+    finally:
+        if (connection):
+            cursor.close()
+            connection.close()
+            print("PostgreSQL connection is closed")
